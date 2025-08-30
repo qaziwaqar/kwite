@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Kwite
+Comment=Professional AI-powered real-time noise cancellation
+Exec=kwite
+Icon=kwite
+Terminal=false
+Type=Application
+Categories=AudioVideo;Audio;
+StartupNotify=true
+Keywords=audio;noise;cancellation;ai;microphone;filter;

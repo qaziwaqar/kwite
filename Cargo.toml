@@ -1,0 +1,124 @@
+[package]
+name = "kwite"
+version = "0.1.0"
+edition = "2021"
+authors = ["Waqar <qaziwaqar7@gmail.com>"]
+description = "Professional AI-powered real-time noise cancellation software"
+keywords = ["audio", "noise-cancellation", "ai", "real-time", "professional"]
+categories = ["multimedia::audio", "science"]
+license = "MIT"
+repository = "https://github.com/qaziwaqar/kwite"
+documentation = "https://github.com/qaziwaqar/kwite/blob/main/README.md"
+readme = "README.md"
+
+[lib]
+name = "kwite"
+path = "src/lib.rs"
+
+[[bin]]
+name = "kwite"
+path = "src/main.rs"
+
+[dependencies]
+eframe = "0.32"
+egui = "0.32.1"
+cpal = "0.16.0"
+tracing = "0.1.41"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+once_cell = "1.19"
+crossbeam-channel = "0.5"
+windows = { version = "0.52", features = ["Media", "Devices", "Win32_Media_Audio"] }
+libc = "0.2"  # Required for Apple Silicon thread priority optimization
+nnnoiseless = "0.5.1"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+toml = "0.8"
+dirs = "5.0"
+webbrowser = "1.0"
+# System information and remote logging dependencies
+chrono = { version = "0.4", features = ["serde"] }
+sha2 = "0.10"
+num_cpus = "1.0"
+reqwest = { version = "0.12", features = ["json", "stream"], optional = true }
+tokio = { version = "1.0", features = ["rt", "time"], optional = true }
+rand = "0.8"
+futures-util = { version = "0.3", optional = true }
+# Enhanced AI dependencies for competitive features
+webrtc-vad = { version = "0.4", optional = true }       # Professional Voice Activity Detection
+rustfft = { version = "6.0", optional = true }          # Advanced frequency analysis  
+apodize = { version = "1.0", optional = true }          # Window functions for audio processing
+spectrum-analyzer = { version = "1.0", optional = true } # Spectral analysis capabilities
+
+
+[dev-dependencies]
+tokio = { version = "1.0", features = ["full"] }
+mockall = "0.13"
+criterion = { version = "0.5", features = ["html_reports"] }
+tempfile = "3.12"
+serial_test = "3.1"
+
+[build-dependencies]
+tauri-build = { version = "2.0", optional = true }
+
+[features]
+default = ["ai-enhanced"]
+ai-enhanced = ["webrtc-vad", "rustfft", "spectrum-analyzer", "apodize"]
+remote-logging = ["reqwest", "tokio", "futures-util"]
+packaging = ["tauri-build"]
+
+# Platform-specific packaging configuration
+[package.metadata.bundle]
+name = "Kwite"
+identifier = "com.kwite.kwite"
+icon = ["assets/icon.png"]
+version = "0.1.0"
+copyright = "Copyright (c) 2024 Kwite Development Team"
+category = "Productivity"
+short_description = "Professional AI-powered real-time noise cancellation"
+long_description = """
+Kwite is a professional AI-powered real-time noise cancellation software built in Rust. 
+The application provides advanced audio processing capabilities with real-time noise 
+reduction and optional AI-enhanced features for professional audio environments.
+
+Features:
+- Real-time noise cancellation using RNNoise
+- AI-enhanced audio processing with adaptive selection
+- Advanced spectral analysis and voice activity detection
+- Professional-grade audio processing pipeline
+- Cross-platform support (Windows, macOS)
+- Low-latency audio processing
+- Intuitive graphical user interface
+"""
+
+# Platform-specific resource configuration  
+resources = ["assets"]
+
+[package.metadata.bundle.osx]
+frameworks = []
+
+[package.metadata.bundle.windows]
+wix_template = "installer/windows/main.wxs"
+
+[package.metadata.deb]
+maintainer = "Waqar <qaziwaqar7@gmail.com>"
+copyright = "2024, Waqar <qaziwaqar7@gmail.com>"
+license-file = ["LICENSE", "4"]
+extended-description = """
+Professional AI-powered real-time noise cancellation software for Windows and macOS.
+Supports RNNoise with intelligent adaptive processing."""
+depends = "$auto, libasound2-dev, libasound2"
+section = "sound"
+priority = "optional"
+assets = [
+    ["target/release/kwite", "usr/bin/", "755"],
+    ["assets/kwite.desktop", "usr/share/applications/", "644"],
+    ["assets/icon.png", "usr/share/pixmaps/kwite.png", "644"],
+]
+
+[[bench]]
+name = "audio_performance"
+harness = false
+
+[[bench]]
+name = "ai_benchmarks"
+harness = false
