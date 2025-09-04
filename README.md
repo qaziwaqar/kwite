@@ -8,97 +8,114 @@ A professional-grade AI noise cancellation application built in Rust, featuring 
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/qaziwaqar)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/qazi-waqar-arshad-210a6a41/)
 
-## 🤖 AI Models & Audio Processing
+## 🤖 AI Model & Audio Processing
 
 Kwite provides professional-grade noise cancellation using the proven RNNoise algorithm, enhanced with advanced audio analysis:
 
-### Available Models
+### Current AI Model
 
-| Model | Availability | CPU Usage | Best For | Quality |
-|-------|-------------|-----------|----------|---------|
-| **RNNoise** | Always | Low (⭐⭐) | General purpose, all scenarios | High |
-| **Auto** | Always | Low (⭐⭐) | Intelligent adaptive processing | High |
+**RNNoise**: The proven recurrent neural network specifically designed for real-time noise suppression
 
-### AI-Enhanced Features
+| Feature | Details |
+|---------|---------|
+| **Model Type** | Gated Recurrent Unit (GRU) based RNN |
+| **Availability** | Always available |
+| **CPU Usage** | Low (⭐⭐) - Optimized for real-time operation |
+| **Best For** | General purpose, all scenarios, professional meetings |
+| **Quality** | High - Battle-tested algorithm with excellent performance |
+| **Latency** | Sub-5ms processing for real-time communication |
 
-The `ai-enhanced` feature flag enables advanced audio processing capabilities beyond the core RNNoise model:
+### Processing Modes
+
+Kwite offers two processing modes built on the RNNoise algorithm:
+
+#### 1. Standard RNNoise Mode
+Direct application of the RNNoise algorithm for reliable, consistent noise cancellation.
+
+#### 2. Auto Mode (AI-Enhanced Processing)
+Intelligent adaptive processing that automatically optimizes the RNNoise algorithm based on your audio environment.
+
+The `ai-enhanced` feature flag enables advanced audio processing capabilities:
 
 #### Default Build (Recommended)
 ```bash
-# Includes AI-Enhanced Processing (no remote logging by default)
+# Includes AI-Enhanced Processing with Auto mode (no remote logging by default)
 cargo build --release
 cargo run --release
 ```
 
 #### Explicit AI-Enhanced Build
 ```bash
-# Explicitly enable AI-enhanced features for advanced audio analysis
+# Explicitly enable AI-enhanced features for Auto mode with advanced audio analysis
 cargo build --release --features ai-enhanced
 cargo run --release --features ai-enhanced
 ```
 
-#### Runtime Feature Check
+#### Runtime Processing Mode Check
 ```rust
-// Check available models in your code
+// Check available processing modes in your code
 use kwite::audio::models::NoiseModel;
 
-let available_models = NoiseModel::available_models();
-println!("Available models: {:?}", available_models);
+let available_modes = NoiseModel::available_models();
+println!("Available processing modes: {:?}", available_modes);
 ```
 
-### Model Selection in GUI
+### Processing Mode Selection in GUI
 
-The interface provides intelligent noise cancellation control:
+The interface provides intelligent noise cancellation control with two processing modes:
 
-1. **Automatic Mode**: The system intelligently adapts processing based on audio environment
-2. **Manual Selection**: Choose between RNNoise and Auto mode in the GUI
-3. **Advanced AI Controls**: Click the "⚙ Advanced AI Controls" button to access:
-   - **AI Model Dropdown**: Select between available models (RNNoise/Auto)
+1. **RNNoise Mode**: Direct, reliable noise cancellation using the proven RNNoise algorithm
+2. **Auto Mode**: Intelligent adaptive processing that automatically optimizes RNNoise based on audio environment
+3. **Advanced Controls**: Click the "⚙ Advanced AI Controls" button to access:
+   - **Processing Mode Dropdown**: Select between RNNoise and Auto mode
    - **Real-time Performance**: View CPU usage indicators (1-5 scale)
-   - **Model Status**: See active model and performance metrics
+   - **Mode Status**: See active processing mode and performance metrics
    - **Latency Monitoring**: Real-time processing latency display
    - **VAD Scores**: Voice Activity Detection percentage
 
-#### How to Access Model Selection
+#### How to Access Mode Selection
 
 1. Start Kwite and enable noise cancellation
 2. In the AI Metrics section, click "⚙ Advanced AI Controls" 
-3. Use the dropdown to select your preferred processing mode
-4. Model will switch immediately without audio interruption
+3. Use the dropdown to select your preferred processing mode (RNNoise or Auto)
+4. Mode will switch immediately without audio interruption
 5. Monitor performance metrics in real-time
 
 #### Simple Mode vs Advanced Mode
 
-- **Simple Mode**: Shows current model status (e.g., "RNNoise ✓" or "Auto ✓")
-- **Advanced Mode**: Full model selection and performance monitoring interface
+- **Simple Mode**: Shows current processing status (e.g., "RNNoise ✓" or "Auto ✓")
+- **Advanced Mode**: Full mode selection and performance monitoring interface
 
-### Model Characteristics
+### Processing Mode Characteristics
 
-#### RNNoise
+#### RNNoise (Direct Mode)
 - **Proven Performance**: Battle-tested algorithm with excellent general-purpose noise reduction
 - **Low CPU Usage**: Optimized for continuous operation with minimal system impact
 - **Wide Compatibility**: Works on all systems and configurations
 - **Fast Processing**: Sub-5ms latency for real-time communication
+- **Predictable**: Consistent, reliable noise cancellation performance
 
 #### Auto Mode (AI-Enhanced)
-- **Intelligent Processing**: Automatically adapts processing based on audio environment
+- **Intelligent Processing**: Automatically adapts RNNoise processing based on audio environment
 - **Enhanced Analysis**: Uses advanced audio analysis with Voice Activity Detection
 - **Frequency Processing**: Leverages FFT-based spectral analysis for improved quality
 - **Professional Features**: Includes windowing functions and spectrum analysis capabilities
+- **Adaptive Behavior**: Optimizes RNNoise settings for your specific environment
 
 ### Recommended Usage
 
-| Scenario | Recommended Model | Rationale |
+| Scenario | Recommended Mode | Rationale |
 |----------|------------------|-----------|
 | **Video Calls** | RNNoise | Efficient and reliable for speech |
 | **Professional Meetings** | Auto | Enhanced quality with adaptive processing |
 | **Gaming/Streaming** | RNNoise | Low CPU impact for gaming performance |
 | **Office Environment** | Auto | Better handling of HVAC, keyboard noise |
 | **Home Office** | Auto | Intelligent adaptation to environment |
+| **Consistent Setup** | RNNoise | Predictable performance for stable environments |
 
 ## 🎯 Features
 
-- **🤖 AI-Powered Noise Cancellation**: Advanced RNNoise model with intelligent adaptive processing
+- **🤖 AI-Powered Noise Cancellation**: RNNoise algorithm with intelligent adaptive processing modes
 - **📊 Real-time AI Metrics**: Voice Activity Detection scores and processing statistics
 - **🌍 Cross-platform Audio**: Built with CPAL for Windows and macOS support
 - **🔗 Virtual Audio Integration**: Seamless integration with virtual audio devices (VB-Audio Cable, BlackHole, PulseAudio)
@@ -182,13 +199,13 @@ cargo build --release --features remote-logging
 
 #### AI-Enhanced Only
 ```bash
-# Includes RNNoise + advanced audio analysis (no remote logging)
+# Includes RNNoise with Auto mode + advanced audio analysis (no remote logging)
 cargo build --release --no-default-features --features ai-enhanced
 ```
 
 #### Minimal Build  
 ```bash
-# RNNoise only (smallest binary size)
+# RNNoise only in direct mode (smallest binary size)
 cargo build --release --no-default-features
 ```
 
@@ -231,13 +248,14 @@ cargo bundle --release
 | **Performance Metrics** | ✅ Real-time AI monitoring | ❌ Limited visibility |
 | **Offline Processing** | ✅ Fully offline | ❌ Cloud-dependent |
 | **Professional Monitoring** | ✅ VAD scores, latency, confidence | ❌ Basic status only |
+| **Processing Modes** | ✅ Direct + Auto adaptive modes | ❌ Single mode only |
 | **Pricing** | ✅ Free and Open Source | ❌ Subscription required |
 
 ### Professional AI Features
-- **Deep Learning Model**: RNNoise GRU-based recurrent neural network
+- **Deep Learning Algorithm**: RNNoise GRU-based recurrent neural network
 - **Real-time Inference**: Sub-10ms AI processing with Voice Activity Detection
-- **Professional Metrics**: VAD confidence scores, processing latency, model confidence
-- **Adaptive Processing**: Intelligent gain control based on speech/noise classification
+- **Professional Metrics**: VAD confidence scores, processing latency, adaptive optimization
+- **Adaptive Processing**: Intelligent parameter optimization based on audio environment (Auto mode)
 - **Enterprise Grade**: Professional monitoring comparable to industry leaders
 
 ## 📊 Usage Statistics & Performance
@@ -466,7 +484,7 @@ kwite/
 
 **High CPU Usage**
 - Lower the sensitivity value if available
-- Use RNNoise mode for lower CPU usage
+- Use direct RNNoise mode instead of Auto mode for lower CPU usage
 - Close other audio applications
 - Use release build instead of debug build
 
@@ -474,7 +492,7 @@ kwite/
 
 **"AI-enhanced features not available"**
 ```bash
-# Verify you built with AI-enhanced features
+# Verify you built with AI-enhanced features for Auto mode
 cargo build --release --features ai-enhanced
 
 # Check feature compilation
@@ -482,14 +500,14 @@ cargo check --features ai-enhanced
 ```
 
 **"High memory usage with AI-enhanced features"**
-- AI-enhanced mode uses more memory for spectral analysis
-- Consider building without `ai-enhanced` for memory-constrained systems
+- Auto mode uses more memory for spectral analysis and adaptive processing
+- Consider using direct RNNoise mode for memory-constrained systems
 - Monitor system resources and adjust accordingly
 
 **"Cannot switch to Auto mode during runtime"**
 - Ensure the application was built with `ai-enhanced` feature
-- Check system resources - advanced features may be disabled on low-memory systems
-- Restart the application if model switching fails
+- Check system resources - Auto mode may be disabled on low-memory systems
+- Restart the application if mode switching fails
 
 ### Debug Mode
 
@@ -515,7 +533,7 @@ cargo metadata --format-version 1 | grep features
 # Build and run tests with specific features
 cargo test --features ai-enhanced
 
-# Check if AI-enhanced models are available
+# Check if AI-enhanced processing modes are available
 cargo test test_model_availability --features ai-enhanced
 ```
 

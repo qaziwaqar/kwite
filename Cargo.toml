@@ -82,7 +82,7 @@ reduction and optional AI-enhanced features for professional audio environments.
 
 Features:
 - Real-time noise cancellation using RNNoise
-- AI-enhanced audio processing with adaptive selection
+- AI-enhanced audio processing with Auto mode for adaptive optimization
 - Advanced spectral analysis and voice activity detection
 - Professional-grade audio processing pipeline
 - Cross-platform support (Windows, macOS)
@@ -105,7 +105,7 @@ copyright = "2024, Waqar <qaziwaqar7@gmail.com>"
 license-file = ["LICENSE", "4"]
 extended-description = """
 Professional AI-powered real-time noise cancellation software for Windows and macOS.
-Supports RNNoise with intelligent adaptive processing."""
+Supports RNNoise with intelligent Auto mode for adaptive processing."""
 depends = "$auto, libasound2-dev, libasound2"
 section = "sound"
 priority = "optional"
